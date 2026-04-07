@@ -7,17 +7,17 @@
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
-## 📖 What is this project?
+## What is this project?
 Cloud servers (like AWS or Azure) cost a lot of money if you leave them running at maximum power when nobody is using them. But if you scale them down and a sudden wave of users logs in, your application crashes. Usually, servers just react to traffic *after* it happens. 
 
 I wanted to see if I could build a predictive model that forecasts server CPU demand *before* the traffic hits, so the system can scale up proactively.
 
-## 🎯 Why this matters (The Goal)
+## Why this matters (The Goal)
 1. **Saving Money:** If the model knows the server will be quiet at 3:00 AM, the company can confidently scale down resources and cut costs.
 2. **Preventing Crashes:** If it knows a spike is coming at noon, it can boot up extra compute power in advance so users don't experience lag.
 3. **Automation:** It removes the need for an engineer to manually watch server dashboards all day.
 
-## 📈 How I built it 
+## How I built it 
 ###### (and flaws along the way)
 I quickly learned that predicting data is harder than it looks. I went through a few different approaches:
 
@@ -34,16 +34,14 @@ I quickly learned that predicting data is harder than it looks. I went through a
 
 ![Prediction Graph](<pred_graph.jpeg>)
 
-## ⚠️ What I want to improve next
+## What I want to improve next
 I'm proud of how the model performs on normal weekly cycles, but there are a few things I would want to fix as I keep learning:
 
 1. **It doesn't know about Holidays:** Right now, the AI only looks at the `Hour` and `Day_of_Week`. If a massive, unpredictable event happens (like Black Friday), the model will fail. I want to add a boolean `is_holiday` feature to the dataset next.
 2. **Real-Time Data:** Currently, I train the model on a static CSV file that I generated using Pandas/NumPy. In the real world, I'd want to connect this to a live streaming pipeline to ingest real server logs.
 3. **Actually Deploying It:** Right now, my code outputs a Matplotlib graph to prove the math works, but it doesn't actually talk to a cloud server yet. Eventually, I'd like to wrap this in an API (like FastAPI) so a real server load-balancer could ask my AI for instructions.
 
----
-
-## ⚙️ How to Run Locally
+## How to Run Locally
 
 **1. Clone the repository and install the libraries:**
 ``` bash
