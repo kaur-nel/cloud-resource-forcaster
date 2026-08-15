@@ -1,10 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score, mean_absolute_error
 import matplotlib.pyplot as plt
 
 # LOAD DATA
 df = pd.read_csv("server_logs.csv")
+print(f"Loaded {len(df)} hours of simulated server telemetry.")
 
 # PREP DATA
 # X = What the AI looks at (Hour and Day)
@@ -22,6 +24,12 @@ model.fit(X_train, y_train)
 
 # PREDICT 
 predictions = model.predict(X_test)
+
+# EVALUATE
+r2 = r2_score(y_test, predictions)
+mae = mean_absolute_error(y_test, predictions)
+print(f"Model R^2 score: {r2:.4f} ({r2 * 100:.1f}%)")
+print(f"Mean Absolute Error: {mae:.2f} CPU percentage points")
 
 # VISUALIZE ACCURACY 
 plt.figure(figsize=(10, 5))
